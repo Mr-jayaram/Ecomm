@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ShopEasy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1><a href="index.html"><i class="fas fa-shopping-bag"></i> ShopEasy</a></h1>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#products" class="nav-link">Products</a>
+                    <a href="index.html#categories" class="nav-link">Categories</a>
+                    <a href="orders.html" class="nav-link">My Orders</a>
+                </div>
+                <div class="nav-actions">
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search products..." class="search-input">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="cart-container">
+                        <a href="cart.html" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Details Section -->
+    <section class="product-details" id="productDetails">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html#products">Products</a>
+                <i class="fas fa-chevron-right"></i>
+                <span id="productBreadcrumb">Product</span>
+            </div>
+
+            <div class="product-detail-content" id="productDetailContent">
+                <!-- Product details will be populated by JavaScript -->
+            </div>
+
+            <!-- Error State -->
+            <div class="empty-state" id="productError" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Product not found</h3>
+                <p>The product you're looking for doesn't exist or has been removed.</p>
+                <a href="index.html" class="cta-button">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="related-products" id="relatedProducts">
+        <div class="container">
+            <h2 class="section-title">Related Products</h2>
+            <div class="products-grid" id="relatedProductsGrid">
+                <!-- Related products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopEasy</h3>
+                    <p>Your premier destination for quality products and exceptional service.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <span class="notification-message" id="notificationMessage"></span>
+            <button class="notification-close" id="notificationClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function initializeProductPage() {
+            const productId = parseInt(localStorage.getItem('selectedProductId'));
+            const product = productData.find(p => p.id === productId);
+            
+            if (!product) {
+                document.getElementById('productError').style.display = 'block';
+                document.getElementById('productDetails').style.display = 'none';
+                document.getElementById('relatedProducts').style.display = 'none';
+                return;
+            }
+
+            // Update breadcrumb
+            document.getElementById('productBreadcrumb').textContent = product.name;
+            document.title = `${product.name} - ShopEasy`;
+
+            // Render product details
+            const productDetailContent = document.getElementById('productDetailContent');
+            productDetailContent.innerHTML = `
+                <div class="product-detail-grid">
+                    <div class="product-detail-image">
+                        <img src="${product.image}" alt="${product.name}" class="main-product-image">
+                    </div>
+                    <div class="product-detail-info">
+                        <h1 class="product-detail-name">${product.name}</h1>
+                        <div class="product-detail-rating">
+                            <div class="rating-stars">${generateStars(product.rating)}</div>
+                            <span class="rating-text">(${product.rating} stars)</span>
+                        </div>
+                        <p class="product-detail-price">${formatPrice(product.price)}</p>
+                        <p class="product-detail-description">${product.description}</p>
+                        
+                        <div class="product-detail-meta">
+                            <div class="meta-item">
+                                <strong>Category:</strong>
+                                <span class="category-tag">${product.category}</span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Availability:</strong>
+                                <span class="stock-status ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}">
+                                    ${product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="product-actions">
+                            <div class="quantity-selector">
+                                <label for="quantity">Quantity:</label>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn" onclick="changeQuantity(-1)">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" id="quantity" value="1" min="1" max="${product.stock}" class="quantity-input">
+                                    <button class="quantity-btn" onclick="changeQuantity(1)">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <button class="add-to-cart-btn large" onclick="addToCartWithQuantity(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
+                                <i class="fas fa-cart-plus"></i>
+                                ${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                            </button>
+                        </div>
+
+                        <div class="product-features">
+                            <div class="feature">
+                                <i class="fas fa-shipping-fast"></i>
+                                <span>Free shipping on orders over $100</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-undo"></i>
+                                <span>30-day return policy</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>1-year warranty</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Render related products
+            renderRelatedProducts(product);
+        }
+
+        function changeQuantity(delta) {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            const newValue = currentValue + delta;
+            const maxValue = parseInt(quantityInput.max);
+            
+            if (newValue >= 1 && newValue <= maxValue) {
+                quantityInput.value = newValue;
+            }
+        }
+
+        function addToCartWithQuantity(productId) {
+            const quantityInput = document.getElementById('quantity');
+            const quantity = parseInt(quantityInput.value);
+            
+            for (let i = 0; i < quantity; i++) {
+                addToCart(productId);
+            }
+        }
+
+        function renderRelatedProducts(currentProduct) {
+            const relatedProductsGrid = document.getElementById('relatedProductsGrid');
+            const relatedProducts = productData
+                .filter(p => p.category === currentProduct.category && p.id !== currentProduct.id)
+                .slice(0, 4);
+
+            if (relatedProducts.length === 0) {
+                document.getElementById('relatedProducts').style.display = 'none';
+                return;
+            }
+
+            relatedProductsGrid.innerHTML = relatedProducts.map(product => `
+                <div class="product-card fade-in">
+                    <img src="${product.image}" alt="${product.name}" class="product-image" onclick="viewProduct(${product.id})">
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-rating">
+                            <div class="rating-stars">${generateStars(product.rating)}</div>
+                            <span class="rating-text">(${product.rating})</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">${formatPrice(product.price)}</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(${product.id})" ${product.stock === 0 ? 'disabled' : ''}>
+                                <i class="fas fa-cart-plus"></i>
+                                ${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Make functions available globally
+        window.changeQuantity = changeQuantity;
+        window.addToCartWithQuantity = addToCartWithQuantity;
+        window.initializeProductPage = initializeProductPage;
+    </script>
+
+    <style>
+        /* Product Details Styles */
+        .product-details {
+            padding: 2rem 0;
+            margin-top: 80px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: hsl(var(--text-light));
+            font-size: var(--font-size-sm);
+        }
+
+        .breadcrumb a {
+            color: hsl(var(--primary-color));
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .product-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-detail-image {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .main-product-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .product-detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-detail-name {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: hsl(var(--text-dark));
+            line-height: 1.2;
+        }
+
+        .product-detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-detail-price {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: hsl(var(--primary-color));
+        }
+
+        .product-detail-description {
+            font-size: var(--font-size-lg);
+            line-height: 1.6;
+            color: hsl(var(--text-light));
+        }
+
+        .product-detail-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: hsl(var(--background-alt));
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-tag {
+            background-color: hsl(var(--primary-color));
+            color: hsl(var(--white));
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .stock-status.in-stock {
+            color: hsl(var(--success));
+            font-weight: 600;
+        }
+
+        .stock-status.out-of-stock {
+            color: hsl(var(--error));
+            font-weight: 600;
+        }
+
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quantity-selector label {
+            font-weight: 600;
+            color: hsl(var(--text-dark));
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 1px solid hsl(var(--border-color));
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-size: var(--font-size-base);
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: hsl(var(--primary-color));
+            box-shadow: 0 0 0 3px hsl(var(--primary-color) / 0.1);
+        }
+
+        .add-to-cart-btn.large {
+            padding: 1rem 2rem;
+            font-size: var(--font-size-lg);
+            width: 100%;
+        }
+
+        .product-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1.5rem;
+            background-color: hsl(var(--background-alt));
+            border-radius: var(--border-radius);
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: hsl(var(--text-dark));
+        }
+
+        .feature i {
+            color: hsl(var(--success));
+            font-size: var(--font-size-lg);
+        }
+
+        .related-products {
+            border-top: 1px solid hsl(var(--border-color));
+            padding-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-detail-image {
+                position: static;
+            }
+
+            .main-product-image {
+                height: 300px;
+            }
+
+            .product-detail-name {
+                font-size: var(--font-size-2xl);
+            }
+
+            .product-detail-price {
+                font-size: var(--font-size-2xl);
+            }
+
+            .quantity-controls {
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>
