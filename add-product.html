@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - ShopEasy Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1><a href="index.html"><i class="fas fa-shopping-bag"></i> ShopEasy</a></h1>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="product-list.html" class="nav-link">Product List</a>
+                    <a href="add-product.html" class="nav-link active">Add Product</a>
+                    <a href="today-sales.html" class="nav-link">Today's Sales</a>
+                </div>
+                <div class="nav-actions">
+                    <div class="cart-container">
+                        <a href="cart.html" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Add Product Section -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h1 class="page-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Add New Product
+                </h1>
+                <div class="admin-actions">
+                    <a href="product-list.html" class="btn secondary">
+                        <i class="fas fa-list"></i>
+                        View All Products
+                    </a>
+                </div>
+            </div>
+
+            <div class="admin-content">
+                <form id="addProductForm" class="product-form">
+                    <div class="form-grid">
+                        <!-- Basic Information -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-info-circle"></i>
+                                Basic Information
+                            </h2>
+                            
+                            <div class="form-group">
+                                <label for="productName">Product Name *</label>
+                                <input type="text" id="productName" name="productName" class="form-input" required>
+                                <div class="form-error" id="productNameError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productDescription">Description *</label>
+                                <textarea id="productDescription" name="productDescription" class="form-input" rows="4" required></textarea>
+                                <div class="form-error" id="productDescriptionError"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="productCategory">Category *</label>
+                                    <select id="productCategory" name="productCategory" class="form-input" required>
+                                        <option value="">Select Category</option>
+                                        <option value="electronics">Electronics</option>
+                                        <option value="clothing">Clothing</option>
+                                        <option value="home">Home & Garden</option>
+                                        <option value="sports">Sports & Outdoors</option>
+                                        <option value="beauty">Beauty & Health</option>
+                                        <option value="books">Books & Media</option>
+                                    </select>
+                                    <div class="form-error" id="productCategoryError"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="productBrand">Brand</label>
+                                    <input type="text" id="productBrand" name="productBrand" class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productTags">Tags (comma separated)</label>
+                                <input type="text" id="productTags" name="productTags" class="form-input" placeholder="e.g., wireless, bluetooth, headphones">
+                                <small class="form-help">Separate tags with commas for better searchability</small>
+                            </div>
+                        </div>
+
+                        <!-- Pricing & Inventory -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <i class="fas fa-dollar-sign"></i>
+                                Pricing & Inventory
+                            </h2>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="productPrice">Price *</label>
+                                    <div class="input-with-prefix">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="productPrice" name="productPrice" class="form-input" step="0.01" min="0" required>
+                                    </div>
+                                    <div class="form-error" id="productPriceError"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="productComparePrice">Compare at Price</label>
+                                    <div class="input-with-prefix">
+                                        <span class="input-prefix">$</span>
+                                        <input type="number" id="productComparePrice" name="productComparePrice" class="form-input" step="0.01" min="0">
+                                    </div>
+                                    <small class="form-help">Show customers the original price for discounts</small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="productStock">Stock Quantity *</label>
+                                    <input type="number" id="productStock" name="productStock" class="form-input" min="0" required>
+                                    <div class="form-error" id="productStockError"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="productSku">SKU</label>
+                                    <input type="text" id="productSku" name="productSku" class="form-input" placeholder="Auto-generated if empty">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-wrapper">
+                                    <input type="checkbox" id="trackQuantity">
+                                    <span class="checkmark"></span>
+                                    Track quantity for this product
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Product Images -->
+                        <div class="form-section full-width">
+                            <h2 class="section-title">
+                                <i class="fas fa-images"></i>
+                                Product Images
+                            </h2>
+
+                            <div class="image-upload-area">
+                                <div class="upload-zone" id="uploadZone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <h3>Upload Product Images</h3>
+                                    <p>Drag and drop images here or click to browse</p>
+                                    <input type="file" id="productImages" name="productImages" accept="image/*" multiple style="display: none;">
+                                    <button type="button" class="upload-btn" onclick="document.getElementById('productImages').click()">
+                                        Choose Files
+                                    </button>
+                                </div>
+                                
+                                <div class="image-preview" id="imagePreview">
+                                    <!-- Image previews will appear here -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productImageUrl">Or Enter Image URL</label>
+                                <input type="url" id="productImageUrl" name="productImageUrl" class="form-input" placeholder="https://example.com/image.jpg">
+                                <button type="button" class="btn secondary" onclick="addImageFromUrl()">Add Image</button>
+                            </div>
+                        </div>
+
+                        <!-- Product Specifications -->
+                        <div class="form-section full-width">
+                            <h2 class="section-title">
+                                <i class="fas fa-cogs"></i>
+                                Product Specifications
+                            </h2>
+
+                            <div class="specifications-container" id="specificationsContainer">
+                                <div class="spec-row">
+                                    <input type="text" class="form-input" placeholder="Specification name" name="specName[]">
+                                    <input type="text" class="form-input" placeholder="Specification value" name="specValue[]">
+                                    <button type="button" class="btn danger small" onclick="removeSpecification(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn secondary" onclick="addSpecification()">
+                                <i class="fas fa-plus"></i>
+                                Add Specification
+                            </button>
+                        </div>
+
+                        <!-- SEO & Meta -->
+                        <div class="form-section full-width">
+                            <h2 class="section-title">
+                                <i class="fas fa-search"></i>
+                                SEO & Meta Information
+                            </h2>
+
+                            <div class="form-group">
+                                <label for="metaTitle">Meta Title</label>
+                                <input type="text" id="metaTitle" name="metaTitle" class="form-input" maxlength="60">
+                                <small class="form-help">Recommended: 50-60 characters</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="metaDescription">Meta Description</label>
+                                <textarea id="metaDescription" name="metaDescription" class="form-input" rows="3" maxlength="160"></textarea>
+                                <small class="form-help">Recommended: 150-160 characters</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="urlSlug">URL Slug</label>
+                                <input type="text" id="urlSlug" name="urlSlug" class="form-input" placeholder="Auto-generated from product name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" onclick="saveDraft()">
+                            <i class="fas fa-save"></i>
+                            Save as Draft
+                        </button>
+                        <button type="submit" class="btn primary">
+                            <i class="fas fa-plus-circle"></i>
+                            Add Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopEasy</h3>
+                    <p>Your premier destination for quality products and exceptional service.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#products">Products</a></li>
+                        <li><a href="index.html#categories">Categories</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <span class="notification-message" id="notificationMessage"></span>
+            <button class="notification-close" id="notificationClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let productImages = [];
+        let specifications = [];
+
+        function generateSKU() {
+            return 'SKU-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function generateSlug(text) {
+            return text
+                .toLowerCase()
+                .replace(/[^a-z0-9 -]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .trim('-');
+        }
+
+        function addImageFromUrl() {
+            const url = document.getElementById('productImageUrl').value;
+            if (!url) {
+                showNotification('Please enter an image URL', 'warning');
+                return;
+            }
+
+            // Validate URL format
+            try {
+                new URL(url);
+            } catch {
+                showNotification('Please enter a valid URL', 'error');
+                return;
+            }
+
+            productImages.push({ url: url, type: 'url' });
+            displayImagePreview();
+            document.getElementById('productImageUrl').value = '';
+            showNotification('Image added successfully', 'success');
+        }
+
+        function displayImagePreview() {
+            const container = document.getElementById('imagePreview');
+            container.innerHTML = productImages.map((image, index) => `
+                <div class="image-preview-item">
+                    <img src="${image.url}" alt="Product image ${index + 1}">
+                    <div class="image-actions">
+                        <button type="button" class="btn danger small" onclick="removeImage(${index})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        ${index === 0 ? '<span class="primary-badge">Primary</span>' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(index) {
+            productImages.splice(index, 1);
+            displayImagePreview();
+        }
+
+        function addSpecification() {
+            const container = document.getElementById('specificationsContainer');
+            const newSpec = document.createElement('div');
+            newSpec.className = 'spec-row';
+            newSpec.innerHTML = `
+                <input type="text" class="form-input" placeholder="Specification name" name="specName[]">
+                <input type="text" class="form-input" placeholder="Specification value" name="specValue[]">
+                <button type="button" class="btn danger small" onclick="removeSpecification(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            container.appendChild(newSpec);
+        }
+
+        function removeSpecification(button) {
+            button.parentElement.remove();
+        }
+
+        function validateForm() {
+            const requiredFields = ['productName', 'productDescription', 'productCategory', 'productPrice', 'productStock'];
+            let isValid = true;
+
+            // Clear previous errors
+            document.querySelectorAll('.form-error').forEach(error => error.textContent = '');
+            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    showFieldError(fieldId, 'This field is required');
+                    isValid = false;
+                }
+            });
+
+            // Price validation
+            const price = parseFloat(document.getElementById('productPrice').value);
+            if (price <= 0) {
+                showFieldError('productPrice', 'Price must be greater than 0');
+                isValid = false;
+            }
+
+            // Stock validation
+            const stock = parseInt(document.getElementById('productStock').value);
+            if (stock < 0) {
+                showFieldError('productStock', 'Stock cannot be negative');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(fieldId + 'Error');
+            field.classList.add('error');
+            if (error) error.textContent = message;
+        }
+
+        function collectFormData() {
+            const formData = {
+                id: Date.now(),
+                name: document.getElementById('productName').value,
+                description: document.getElementById('productDescription').value,
+                category: document.getElementById('productCategory').value,
+                brand: document.getElementById('productBrand').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                comparePrice: parseFloat(document.getElementById('productComparePrice').value) || null,
+                stock: parseInt(document.getElementById('productStock').value),
+                sku: document.getElementById('productSku').value || generateSKU(),
+                trackQuantity: document.getElementById('trackQuantity').checked,
+                images: productImages,
+                primaryImage: productImages[0]?.url || '',
+                specifications: collectSpecifications(),
+                tags: document.getElementById('productTags').value.split(',').map(tag => tag.trim()).filter(tag => tag),
+                metaTitle: document.getElementById('metaTitle').value,
+                metaDescription: document.getElementById('metaDescription').value,
+                urlSlug: document.getElementById('urlSlug').value || generateSlug(document.getElementById('productName').value),
+                rating: 0,
+                reviews: 0,
+                status: 'active',
+                createdAt: new Date().toISOString()
+            };
+
+            return formData;
+        }
+
+        function collectSpecifications() {
+            const specNames = document.querySelectorAll('input[name="specName[]"]');
+            const specValues = document.querySelectorAll('input[name="specValue[]"]');
+            const specs = {};
+
+            specNames.forEach((nameInput, index) => {
+                const name = nameInput.value.trim();
+                const value = specValues[index]?.value.trim();
+                if (name && value) {
+                    specs[name] = value;
+                }
+            });
+
+            return specs;
+        }
+
+        function saveDraft() {
+            if (!document.getElementById('productName').value.trim()) {
+                showNotification('Please enter a product name to save draft', 'warning');
+                return;
+            }
+
+            const formData = collectFormData();
+            formData.status = 'draft';
+
+            // Save to localStorage
+            const drafts = JSON.parse(localStorage.getItem('productDrafts') || '[]');
+            drafts.push(formData);
+            localStorage.setItem('productDrafts', JSON.stringify(drafts));
+
+            showNotification('Product saved as draft', 'success');
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            const formData = collectFormData();
+            const btn = event.target.querySelector('.btn.primary');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding Product...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Save to localStorage
+                const products = JSON.parse(localStorage.getItem('adminProducts') || '[]');
+                products.push(formData);
+                localStorage.setItem('adminProducts', JSON.stringify(products));
+
+                showNotification('Product added successfully!', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'product-list.html';
+                }, 1500);
+            }, 2000);
+        }
+
+        function initializeAddProductPage() {
+            // Setup form submission
+            document.getElementById('addProductForm').addEventListener('submit', handleSubmit);
+
+            // Auto-generate SKU if empty
+            document.getElementById('productName').addEventListener('blur', (e) => {
+                if (!document.getElementById('productSku').value) {
+                    document.getElementById('productSku').value = generateSKU();
+                }
+                if (!document.getElementById('urlSlug').value) {
+                    document.getElementById('urlSlug').value = generateSlug(e.target.value);
+                }
+            });
+
+            // Setup file upload
+            document.getElementById('productImages').addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        productImages.push({ url: event.target.result, type: 'file', file: file });
+                        displayImagePreview();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            // Setup drag and drop
+            const uploadZone = document.getElementById('uploadZone');
+            uploadZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadZone.classList.add('dragover');
+            });
+
+            uploadZone.addEventListener('dragleave', () => {
+                uploadZone.classList.remove('dragover');
+            });
+
+            uploadZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadZone.classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                // Handle dropped files same as file input
+                files.forEach(file => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            productImages.push({ url: event.target.result, type: 'file', file: file });
+                            displayImagePreview();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        }
+
+        // Initialize page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            init(); // Initialize common functionality
+            initializeAddProductPage();
+        });
+
+        // Make functions globally available
+        window.addImageFromUrl = addImageFromUrl;
+        window.removeImage = removeImage;
+        window.addSpecification = addSpecification;
+        window.removeSpecification = removeSpecification;
+        window.saveDraft = saveDraft;
+    </script>
+
+    <style>
+        /* Admin Pages Styles */
+        .admin-section {
+            padding: 2rem 0;
+            margin-top: 80px;
+            min-height: calc(100vh - 200px);
+            background-color: hsl(var(--background-alt));
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background-color: hsl(var(--white));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .page-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: hsl(var(--text-dark));
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0;
+        }
+
+        .page-title i {
+            color: hsl(var(--primary-color));
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn.primary {
+            background-color: hsl(var(--primary-color));
+            color: hsl(var(--white));
+        }
+
+        .btn.primary:hover:not(:disabled) {
+            background-color: hsl(var(--primary-hover));
+        }
+
+        .btn.secondary {
+            background-color: hsl(var(--white));
+            color: hsl(var(--text-dark));
+            border: 1px solid hsl(var(--border-color));
+        }
+
+        .btn.secondary:hover {
+            background-color: hsl(var(--background-alt));
+        }
+
+        .btn.danger {
+            background-color: hsl(var(--error));
+            color: hsl(var(--white));
+        }
+
+        .btn.danger:hover {
+            background-color: hsl(0 84% 55%);
+        }
+
+        .btn.small {
+            padding: 0.5rem 0.75rem;
+            font-size: var(--font-size-xs);
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Product Form */
+        .admin-content {
+            background-color: hsl(var(--white));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-section.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .section-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: hsl(var(--text-dark));
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 0 0 1rem 0;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid hsl(var(--border-color));
+        }
+
+        .section-title i {
+            color: hsl(var(--primary-color));
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: hsl(var(--text-dark));
+            font-size: var(--font-size-sm);
+        }
+
+        .form-input {
+            padding: 0.75rem;
+            border: 1px solid hsl(var(--border-color));
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            transition: var(--transition);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: hsl(var(--primary-color));
+            box-shadow: 0 0 0 3px hsl(var(--primary-color) / 0.1);
+        }
+
+        .form-input.error {
+            border-color: hsl(var(--error));
+        }
+
+        .form-error {
+            color: hsl(var(--error));
+            font-size: var(--font-size-sm);
+        }
+
+        .form-help {
+            color: hsl(var(--text-light));
+            font-size: var(--font-size-xs);
+        }
+
+        .input-with-prefix {
+            position: relative;
+        }
+
+        .input-prefix {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: hsl(var(--text-light));
+            font-weight: 600;
+        }
+
+        .input-with-prefix .form-input {
+            padding-left: 2rem;
+        }
+
+        /* Image Upload */
+        .image-upload-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .upload-zone {
+            border: 2px dashed hsl(var(--border-color));
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: hsl(var(--primary-color));
+            background-color: hsl(var(--primary-color) / 0.05);
+        }
+
+        .upload-zone i {
+            font-size: var(--font-size-4xl);
+            color: hsl(var(--text-light));
+            margin-bottom: 1rem;
+        }
+
+        .upload-zone h3 {
+            color: hsl(var(--text-dark));
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-zone p {
+            color: hsl(var(--text-light));
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-btn {
+            background-color: hsl(var(--primary-color));
+            color: hsl(var(--white));
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .image-preview-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-preview-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .image-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .primary-badge {
+            background-color: hsl(var(--success));
+            color: hsl(var(--white));
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+
+        /* Specifications */
+        .specifications-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .spec-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Checkbox */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+            color: hsl(var(--text-dark));
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkmark {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid hsl(var(--border-color));
+            border-radius: 4px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
+            background-color: hsl(var(--primary-color));
+            border-color: hsl(var(--primary-color));
+        }
+
+        .checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 6px;
+            height: 10px;
+            border: solid hsl(var(--white));
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid hsl(var(--border-color));
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .spec-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .page-title {
+                font-size: var(--font-size-2xl);
+                justify-content: center;
+            }
+        }
+    </style>
+</body>
+</html>
