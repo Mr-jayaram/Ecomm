@@ -1,6 +1,8 @@
 /* CSS Custom Properties */
 :root {
-    --primary-color: 220 85% 55%; /* #2563eb */
+    /* --primary-color: 220 85% 55%; */
+    --primary-color: #1D1D53;
+     /* #2563eb */
     --primary-hover: 220 85% 50%; /* #1d4ed8 */
     --secondary-color: 142 76% 36%; /* #059669 */
     --accent-color: 25 95% 53%; /* #f97316 */
@@ -90,7 +92,7 @@ a {
 }
 
 .logo h1 {
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
     font-size: var(--font-size-xl);
     font-weight: 700;
 }
@@ -111,7 +113,7 @@ a {
 
 .nav-link:hover,
 .nav-link.active {
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
 }
 
 .nav-link.active::after {
@@ -121,7 +123,7 @@ a {
     left: 0;
     right: 0;
     height: 2px;
-    background-color: hsl(var(--primary-color));
+    background-color: var(--primary-color);
 }
 
 .nav-actions {
@@ -146,7 +148,7 @@ a {
 
 .search-input:focus {
     outline: none;
-    border-color: hsl(var(--primary-color));
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px hsl(var(--primary-color) / 0.1);
 }
 
@@ -158,7 +160,7 @@ a {
 }
 
 .search-btn:hover {
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
 }
 
 .cart-container {
@@ -175,8 +177,8 @@ a {
 }
 
 .cart-link:hover {
-    background-color: hsl(var(--background-alt));
-    color: hsl(var(--primary-color));
+    background-color: var(--background-alt);
+    color: var(--primary-color);
 }
 
 .cart-count {
@@ -363,7 +365,7 @@ section {
 
 .filter-select:focus {
     outline: none;
-    border-color: hsl(var(--primary-color));
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px hsl(var(--primary-color) / 0.1);
 }
 
@@ -438,11 +440,11 @@ section {
 .product-price {
     font-size: var(--font-size-xl);
     font-weight: 700;
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
 }
 
 .add-to-cart-btn {
-    background-color: hsl(var(--primary-color));
+    background-color: var(--primary-color);
     color: hsl(var(--white));
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
@@ -455,7 +457,7 @@ section {
 }
 
 .add-to-cart-btn:hover {
-    background-color: hsl(var(--primary-hover));
+    /* background-color: hsl(var(--primary-hover)); */
 }
 
 .add-to-cart-btn:disabled {
@@ -529,7 +531,7 @@ section {
 }
 
 .cart-item-price {
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -540,7 +542,7 @@ section {
 }
 
 .quantity-btn {
-    background-color: hsl(var(--background-alt));
+    background-color: var(--background-alt);
     color: hsl(var(--text-dark));
     padding: 0.25rem 0.5rem;
     border-radius: var(--border-radius);
@@ -559,7 +561,7 @@ section {
 
 .cart-item-quantity {
     padding: 0.25rem 0.75rem;
-    background-color: hsl(var(--background-alt));
+    background-color: var(--background-alt);
     border-radius: var(--border-radius);
     font-weight: 600;
     min-width: 3rem;
@@ -650,7 +652,7 @@ section {
 
 .form-input:focus {
     outline: none;
-    border-color: hsl(var(--primary-color));
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px hsl(var(--primary-color) / 0.1);
 }
 
@@ -713,7 +715,7 @@ section {
 }
 
 .social-links a:hover {
-    color: hsl(var(--primary-color));
+    color: var(--primary-color);
 }
 
 .footer-bottom {
