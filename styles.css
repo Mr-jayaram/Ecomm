@@ -776,7 +776,7 @@ section {
     }
 
     .mobile-menu-toggle {
-        display: flex;
+        display: none;
     }
 
     .search-container {
