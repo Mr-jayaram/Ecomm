@@ -833,6 +833,11 @@ section {
      section{
         padding: 1rem 0 ;
      } 
+    .swiper-button-next,
+    .swiper-button-prev {
+      top: 63%;
+    }
+
 }
 
 @media (max-width: 480px) {
