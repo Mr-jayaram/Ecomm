@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders - ShopEasy</title>
+    <title>My Orders</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -364,13 +364,14 @@
         .order-card {
             background-color: hsl(var(--white));
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
             overflow: hidden;
             transition: var(--transition);
+            margin-bottom: 20px;
         }
 
         .order-card:hover {
-            box-shadow: var(--shadow-lg);
+            /* box-shadow: var(--shadow-lg); */
         }
 
         .order-header {
