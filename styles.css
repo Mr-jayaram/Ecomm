@@ -831,10 +831,7 @@ section {
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 6rem 1rem 3rem;
-    }
-
+    
     .hero-content h1 {
         font-size: var(--font-size-xl);
     }
