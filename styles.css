@@ -83,10 +83,11 @@ a {
 }
 
 .nav-container {
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
+    width:100%;
     margin: 0 auto;
     padding: 0 1rem;
 }
@@ -770,9 +771,15 @@ section {
 .notification-close:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
+.mobile-search-container{
+    /* display: none; */
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .mobile-search-container{
+      /* display: block; */
+    }
     .nav-menu {
         display: none;
     }
@@ -885,3 +892,87 @@ section {
         opacity: 1;
     }
 }
+
+
+/* modal search */
+
+ .search-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: #aaa;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    .search-results {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .search-results li {
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+    }
+
+    .search-results li:hover {
+      background-color: #f0f0f0;
+    }
