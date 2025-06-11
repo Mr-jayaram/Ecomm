@@ -101,37 +101,37 @@ const categoryData = [
         id: 1,
         name: "Electronics",
         slug: "electronics",
-        image: "https://pixabay.com/get/g7e5127e150d94165306904bff07d108e61c608b2e009cc3d984ca4c30d8b98ec5050033954ff13d38eada5caaf1a37c75dcca367c0aac8e32c08eab0b52aeb68_1280.jpg"
+        image: "https://d2ajlz7o3p8ddv.cloudfront.net/media/products/thumbnails/sel1224gm-thumb.jpg"
     },
     {
         id: 2,
         name: "Clothing",
         slug: "clothing",
-        image: "https://pixabay.com/get/g6d4882716fab63039fec2750774020623ff3d9ea5281aaa173f95332b94aaadd83e9fb53b12819f2d4a038a3a9ddbc203e84e5e09b77135e5bbdb9bbcd5caeec_1280.jpg"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdMMSr-MnwA3oxegPFWh6elcIM9aZeBRGnBu3Yx2kivU3NcZ47Gzix6LORRgzryUNmrdQ&usqp=CAU"
     },
     {
         id: 3,
         name: "Home & Garden",
         slug: "home",
-        image: "https://pixabay.com/get/g807ea052835a6061bd03b111b79ae0990abf982daf6f3c4d8559e7db5e718ea2caeaffd1c0326bc5e69ce2158ab0c24d94b367ce2a9c8162573f8fecb740198f_1280.jpg"
+        image: "https://www.idfcfirstbank.com/content/dam/idfcfirstbank/images/blog/credit-card/smart-home-appliances-save-time-717x404.jpg"
     },
     {
         id: 4,
         name: "Sports & Outdoors",
         slug: "sports",
-        image: "https://pixabay.com/get/gfe642a66e24ce384dcde9d5dad8aaf887d4a55bd5bf00000b18ffbc26f3ac1fc69e4c977cf42d1222d3faff370e9218cf9af2cddf598bf691a6dfed1787a9e71_1280.jpg"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB4DDVsIYvwRGYvCmqM7Dh9JUlAENTjXfHeQ&s"
     },
     {
         id: 5,
         name: "Beauty & Health",
         slug: "beauty",
-        image: "https://pixabay.com/get/g67e24f311c70a9ad7142f5ed6bd12186c9425fd75c361b5d4e6e6e037c203386a786df90392506c8431103907a6c78ac956364d1a3b41653be53252b059821b2_1280.jpg"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR6kXZC_MZvrYJo_bf4lmCTrbH8akVKb7DWqAWH7wNJArfJX1QKs-GRqpU3U0jpg_x4q0&usqp=CAU"
     },
     {
         id: 6,
         name: "Books & Media",
         slug: "books",
-        image: "https://pixabay.com/get/g65f8257d4177816aaa1da09228e8b02452a05d9fb6fdd0b1610b7e1b33714de63e0a2f85e43628b7d5968755ebab7c75c9076b7f04a1906de3f7b0ef034b537d_1280.jpg"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR6kXZC_MZvrYJo_bf4lmCTrbH8akVKb7DWqAWH7wNJArfJX1QKs-GRqpU3U0jpg_x4q0&usqp=CAU"
     }
 ];
 
