@@ -329,7 +329,7 @@ section {
 }
 
 .category-name {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-sm);
     font-weight: 600;
     color: hsl(var(--text-dark));
 }
