@@ -779,7 +779,7 @@ section {
     background-color: rgba(255, 255, 255, 0.1);
 }
 .mobile-search-container{
-    /* display: none; */
+    font-size: 18px;
 }
 
 /* Responsive Design */
