@@ -44,7 +44,7 @@ body {
 }
 
 img {
-    max-width: 100%;
+    /* max-width: 100%; */
     height: auto;
     display: block;
 }
@@ -985,7 +985,7 @@ section {
     }
 
     .product-category-wise .productcard,.product-category-wise .product-image{
-        width: 300px ;
+        width: 28px ;
     }
     .product-category-wise::-webkit-scrollbar{
         width: 0;
