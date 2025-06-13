@@ -21,6 +21,16 @@
                 </div>
                
                 <div class="nav-actions">
+                      <div class="mobile-search-container" onclick="openModal()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
+                    <div class="cart-container">
+                        <a href="cart.html" class="cart-link">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
                   
                      <!-- Dropdown -->
                     <div class="dropdown">
@@ -34,16 +44,7 @@
                         </ul>
                     </div>
 
-                     <div class="mobile-search-container" onclick="openModal()">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                    
-                    <div class="cart-container">
-                        <a href="cart.html" class="cart-link">
-                            <i class="fas fa-shopping-cart"></i>
-                            <span class="cart-count" id="cartCount">0</span>
-                        </a>
-                    </div>
+                   
                 </div>
                 <div class="mobile-menu-toggle" id="mobileMenuToggle">
                     <span></span>
@@ -152,7 +153,12 @@
             </div>
 
             <!-- Products Grid -->
-            <div class="products-grid" id="productsGrid">
+            <div>
+               <div class="row">
+                  <div class="col-md-10"></div>
+                  <div class="col-md-2"><p class="text-end text-primary p-3 fw-800">See More</p></div>
+               </div>
+                <div class="products-grid" id="productsGrid"></div>
             </div>
 
             <!-- Empty State -->
@@ -168,6 +174,10 @@
     <section>
         <div class="particular-product-list container">
             <h4 class="py-5">Top Categories</h4>
+              <div class="row">
+                  <div class="col-md-10"></div>
+                  <div class="col-md-2"><p class="text-end text-primary p-3 fw-800">See More</p></div>
+               </div>
             <div class="product-category-wise">
                  <div class="productcard fade-in">
                     <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
