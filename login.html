@@ -4,111 +4,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ShopEasy</title>
+    <title>jai</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
-        <nav class="nav">
+    <header>
+        <nav>
             <div class="nav-container">
                 <div class="logo">
-                    <h1><a href="index.html"><i class="fas fa-shopping-bag"></i> ShopEasy</a></h1>
+                    <h1><i class="fas fa-shopping-bag"></i> ShopNow </h1>
                 </div>
-                <div class="nav-menu">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="index.html#products" class="nav-link">Products</a>
-                    <a href="index.html#categories" class="nav-link">Categories</a>
-                    <a href="orders.html" class="nav-link">My Orders</a>
-                </div>
+               
                 <div class="nav-actions">
+                      <div class="mobile-search-container" onclick="openModal()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    
                     <div class="cart-container">
                         <a href="cart.html" class="cart-link">
                             <i class="fas fa-shopping-cart"></i>
                             <span class="cart-count" id="cartCount">0</span>
                         </a>
                     </div>
+                  
+                     <!-- Dropdown -->
+                    <div class="dropdown">
+                        <button class=" dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        more
+                        </button>
+                        <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="orders.html"><i class="fa-solid fa-bag-shopping"></i> My Orders</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+
+                   
+                </div>
+                <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </nav>
     </header>
 
-    <!-- Login Section -->
-    <section class="auth-section">
+
+    <!-- search modal -->
+     
+    <div id="searchModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <input type="text" id="searchInput" class="search-box" placeholder="Type to search..." onkeyup="filterResults()">
+        <ul class="search-results" id="resultsList">
+        <li>Dashboard</li>
+        <li>Reports</li>
+        <li>Users</li>
+        <li>Settings</li>
+        <li>Profile</li>
+        <li>Logout</li>
+        </ul>
+    </div>
+    </div>
+
+    
+
+    <!-- Hero Section -->
+    <section class="hero p-0">
+         <div class="swiper">
+            <div class="swiper-wrapper">
+            <div class="swiper-slide"><img class="banner-img" src="assets/img/banner2.jpg" /></div>
+            <div class="swiper-slide"><img  class="banner-img" src="assets/img/banner3.jpg" /></div>
+            <div class="swiper-slide"><img  class="banner-img" src="assets/img/banner4.jpg" /></div>
+            <div class="swiper-slide"><img  class="banner-img" src="assets/img/banner1.jpg" /></div>
+            </div>
+
+            <!-- Pagination (dots) -->
+            <div class="swiper-pagination"></div>
+
+            <!-- Custom Previous/Next -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </section>
+
+
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
         <div class="container">
-            <div class="auth-container">
-                <div class="auth-form-wrapper">
-                    <div class="auth-header">
-                        <h1>Welcome Back</h1>
-                        <p>Sign in to your ShopEasy account</p>
-                    </div>
+            <h2 class="section-title">Shop by Category</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
 
-                    <form id="loginForm" class="auth-form">
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-input" required>
-                            <div class="form-error" id="emailError"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <div class="password-input-wrapper">
-                                <input type="password" id="password" name="password" class="form-input" required>
-                                <button type="button" class="password-toggle" onclick="togglePassword('password')">
-                                    <i class="fas fa-eye" id="passwordToggleIcon"></i>
-                                </button>
-                            </div>
-                            <div class="form-error" id="passwordError"></div>
-                        </div>
-
-                        <div class="form-options">
-                            <label class="checkbox-wrapper">
-                                <input type="checkbox" id="rememberMe">
-                                <span class="checkmark"></span>
-                                Remember me
-                            </label>
-                            <a href="#" class="forgot-password">Forgot password?</a>
-                        </div>
-
-                        <button type="submit" class="auth-btn primary">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Sign In
-                        </button>
-
-                        <div class="auth-divider">
-                            <span>or</span>
-                        </div>
-
-                        <div class="social-auth">
-                            <button type="button" class="social-btn google">
-                                <i class="fab fa-google"></i>
-                                Continue with Google
-                            </button>
-                            <button type="button" class="social-btn facebook">
-                                <i class="fab fa-facebook-f"></i>
-                                Continue with Facebook
-                            </button>
-                        </div>
-
-                        <div class="auth-footer">
-                            <p>Don't have an account? <a href="register.html">Create one</a></p>
-                        </div>
-                    </form>
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="categoryFilter">Category:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="home">Home & Garden</option>
+                        <option value="sports">Sports & Outdoors</option>
+                        <option value="beauty">Beauty & Health</option>
+                        <option value="books">Books & Media</option>
+                    </select>
                 </div>
-
-                <div class="auth-image">
-                    <div class="auth-image-content">
-                        <h2>Start Your Shopping Journey</h2>
-                        <p>Access exclusive deals, track your orders, and enjoy a personalized shopping experience.</p>
-                        <ul class="feature-list">
-                            <li><i class="fas fa-check"></i> Exclusive member discounts</li>
-                            <li><i class="fas fa-check"></i> Order tracking and history</li>
-                            <li><i class="fas fa-check"></i> Personalized recommendations</li>
-                            <li><i class="fas fa-check"></i> Fast and secure checkout</li>
-                        </ul>
-                    </div>
+                <div class="filter-group">
+                    <label for="priceFilter">Price Range:</label>
+                    <select id="priceFilter" class="filter-select">
+                        <option value="">All Prices</option>
+                        <option value="0-25">$0 - $25</option>
+                        <option value="25-50">$25 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100+">$100+</option>
+                    </select>
                 </div>
+                <div class="filter-group">
+                    <label for="sortFilter">Sort by:</label>
+                    <select id="sortFilter" class="filter-select">
+                        <option value="name">Name</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading" id="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading products...</p>
+            </div>
+
+            <!-- Products Grid -->
+            <div>
+               <div class="row">
+                  <div class="col-md-10"></div>
+                  <div class="col-md-2"><p class="text-end text-primary p-3 fw-800">See More</p></div>
+               </div>
+                <div class="products-grid" id="productsGrid"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No products found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="particular-product-list container">
+            <h4 class="py-5">Top Categories</h4>
+              <div class="row">
+                  <div class="col-md-10"></div>
+                  <div class="col-md-2"><p class="text-end text-primary p-3 fw-800">See More</p></div>
+               </div>
+            <div class="product-category-wise">
+                 <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                  <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                  <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                  <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                  <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                 <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
+                  <div class="productcard fade-in">
+                    <img src="https://www.gonoise.com/cdn/shop/files/1_c95e5561-4f66-413d-b143-42d31821e554.webp?v=1721392308" alt="Smart Fitness Watch" class="product-image" onclick="viewProduct(3)">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Fitness Watch</h3>
+                        <p class="product-description">Advanced fitness tracking with heart rate monitor and GPS</p>
+                        <div class="product-rating">
+                            <div class="rating-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                            <span class="rating-text">(4.3)</span>
+                        </div>
+                        <div class="product-footer">
+                            <span class="product-price">$199.99</span>
+                            <button class="add-to-cart-btn" onclick="addToCart(3)">
+                                <i class="fas fa-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    
+                 </div>
+
             </div>
         </div>
     </section>
@@ -124,9 +334,9 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html#products">Products</a></li>
-                        <li><a href="index.html#categories">Categories</a></li>
-                        <li><a href="orders.html">My Orders</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#about">About Us</a></li>
                         <li><a href="cart.html">Cart</a></li>
                     </ul>
                 </div>
@@ -150,7 +360,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 ShopEasy. All rights reserved.</p>
+                <p>&copy; 2024 . All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -166,428 +376,51 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(inputId + 'ToggleIcon');
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'fas fa-eye-slash';
-            } else {
-                input.type = 'password';
-                icon.className = 'fas fa-eye';
-            }
-        }
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        function validateForm() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            let isValid = true;
 
-            // Clear previous errors
-            document.querySelectorAll('.form-error').forEach(error => error.textContent = '');
-            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+ 
+  function openModal() {
+    document.getElementById("searchModal").style.display = "block";
+    document.getElementById("searchInput").focus();
+  }
 
-            // Email validation
-            if (!email) {
-                showFieldError('email', 'Email is required');
-                isValid = false;
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showFieldError('email', 'Please enter a valid email address');
-                isValid = false;
-            }
+  function closeModal() {
+    document.getElementById("searchModal").style.display = "none";
+  }
 
-            // Password validation
-            if (!password) {
-                showFieldError('password', 'Password is required');
-                isValid = false;
-            } else if (password.length < 6) {
-                showFieldError('password', 'Password must be at least 6 characters');
-                isValid = false;
-            }
+  window.onclick = function(event) {
+    let modal = document.getElementById("searchModal");
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
 
-            return isValid;
-        }
+  function filterResults() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let items = document.querySelectorAll("#resultsList li");
 
-        function showFieldError(fieldId, message) {
-            const field = document.getElementById(fieldId);
-            const error = document.getElementById(fieldId + 'Error');
-            field.classList.add('error');
-            error.textContent = message;
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            
-            if (!validateForm()) {
-                return;
-            }
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
-
-            // Simulate login process
-            const btn = event.target.querySelector('.auth-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                // Simulate successful login
-                const userData = {
-                    email: email,
-                    name: email.split('@')[0],
-                    loginTime: new Date().toISOString(),
-                    rememberMe: rememberMe
-                };
-
-                localStorage.setItem('user', JSON.stringify(userData));
-                showNotification('Login successful! Welcome back.', 'success');
-
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
-            }, 2000);
-        }
-
-        function initializeLoginPage() {
-            // Check if user is already logged in
-            const user = localStorage.getItem('user');
-            if (user) {
-                window.location.href = 'index.html';
-                return;
-            }
-
-            // Setup form submission
-            document.getElementById('loginForm').addEventListener('submit', handleLogin);
-
-            // Setup social login buttons
-            document.querySelector('.social-btn.google').addEventListener('click', () => {
-                showNotification('Google login integration would be implemented here', 'info');
-            });
-
-            document.querySelector('.social-btn.facebook').addEventListener('click', () => {
-                showNotification('Facebook login integration would be implemented here', 'info');
-            });
-        }
-
-        // Initialize page when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            init(); // Initialize common functionality
-            initializeLoginPage();
-        });
-
-        // Make functions globally available
-        window.togglePassword = togglePassword;
-    </script>
-
-    <style>
-        /* Auth Pages Styles */
-        .auth-section {
-            padding: 2rem 0;
-            margin-top: 80px;
-            min-height: calc(100vh - 200px);
-            background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background-alt)) 100%);
-        }
-
-        .auth-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: hsl(var(--white));
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-        }
-
-        .auth-form-wrapper {
-            padding: 3rem;
-        }
-
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .auth-header h1 {
-            font-size: var(--font-size-3xl);
-            font-weight: 700;
-            color: hsl(var(--text-dark));
-            margin-bottom: 0.5rem;
-        }
-
-        .auth-header p {
-            color: hsl(var(--text-light));
-            font-size: var(--font-size-base);
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .password-input-wrapper {
-            position: relative;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: hsl(var(--text-light));
-            cursor: pointer;
-            padding: 0.25rem;
-        }
-
-        .password-toggle:hover {
-            color: hsl(var(--primary-color));
-        }
-
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0.5rem 0;
-        }
-
-        .checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            font-size: var(--font-size-sm);
-            color: hsl(var(--text-dark));
-        }
-
-        .checkbox-wrapper input[type="checkbox"] {
-            display: none;
-        }
-
-        .checkmark {
-            width: 1.25rem;
-            height: 1.25rem;
-            border: 2px solid hsl(var(--border-color));
-            border-radius: 4px;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
-            background-color: hsl(var(--primary-color));
-            border-color: hsl(var(--primary-color));
-        }
-
-        .checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
-            content: '';
-            position: absolute;
-            left: 4px;
-            top: 1px;
-            width: 6px;
-            height: 10px;
-            border: solid hsl(var(--white));
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
-        }
-
-        .forgot-password {
-            color: hsl(var(--primary-color));
-            text-decoration: none;
-            font-size: var(--font-size-sm);
-            transition: var(--transition);
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        .auth-btn {
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-base);
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            border: none;
-        }
-
-        .auth-btn.primary {
-            background-color: hsl(var(--primary-color));
-            color: hsl(var(--white));
-        }
-
-        .auth-btn.primary:hover:not(:disabled) {
-            background-color: hsl(var(--primary-hover));
-        }
-
-        .auth-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .auth-divider {
-            text-align: center;
-            position: relative;
-            margin: 1rem 0;
-        }
-
-        .auth-divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background-color: hsl(var(--border-color));
-        }
-
-        .auth-divider span {
-            background-color: hsl(var(--white));
-            padding: 0 1rem;
-            color: hsl(var(--text-light));
-            font-size: var(--font-size-sm);
-        }
-
-        .social-auth {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .social-btn {
-            padding: 0.75rem;
-            border-radius: var(--border-radius);
-            font-size: var(--font-size-sm);
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            border: 1px solid hsl(var(--border-color));
-            background-color: hsl(var(--white));
-        }
-
-        .social-btn:hover {
-            background-color: hsl(var(--background-alt));
-        }
-
-        .social-btn.google {
-            color: #db4437;
-        }
-
-        .social-btn.facebook {
-            color: #4267b2;
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid hsl(var(--border-color));
-        }
-
-        .auth-footer p {
-            color: hsl(var(--text-light));
-            font-size: var(--font-size-sm);
-        }
-
-        .auth-footer a {
-            color: hsl(var(--primary-color));
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .auth-footer a:hover {
-            text-decoration: underline;
-        }
-
-        .auth-image {
-            background: linear-gradient(135deg, hsl(var(--primary-color)) 0%, hsl(var(--secondary-color)) 100%);
-            padding: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: hsl(var(--white));
-        }
-
-        .auth-image-content h2 {
-            font-size: var(--font-size-2xl);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .auth-image-content p {
-            font-size: var(--font-size-base);
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .feature-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: var(--font-size-sm);
-        }
-
-        .feature-list i {
-            color: hsl(var(--white));
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 0.25rem;
-            border-radius: 50%;
-            width: 1.5rem;
-            height: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .auth-container {
-                grid-template-columns: 1fr;
-                margin: 1rem;
-            }
-
-            .auth-image {
-                order: -1;
-                padding: 2rem;
-            }
-
-            .auth-form-wrapper {
-                padding: 2rem;
-            }
-
-            .form-options {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-
-            .social-auth {
-                gap: 0.5rem;
-            }
-        }
-    </style>
+    items.forEach(item => {
+      item.style.display = item.textContent.toLowerCase().includes(input) ? "block" : "none";
+    });
+  }
+</script>
 </body>
 </html>
